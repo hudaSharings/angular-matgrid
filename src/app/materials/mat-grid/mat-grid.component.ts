@@ -25,13 +25,14 @@ export class MatGridComponent implements OnInit {
   delete=new EventEmitter()
 
   constructor() {
-    this.displayedColumns.push('Action')
+   
    }
 
   ngOnInit() {
     this.Columns=this.columnDef
     this.displayedColumns =this.columnDef.map(x=>{return x.name;}) 
     this.dataSource= this.data; 
+     this.displayedColumns.push('Action')
   }
 
   OnDetail(item:any){
