@@ -16,7 +16,7 @@ export class MatGridComponent implements OnInit {
   displayedColumns: string[]=[];
   dataSource:any
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   @Input()
   columnDef:IColumn[]
@@ -39,6 +39,7 @@ export class MatGridComponent implements OnInit {
     this.displayedColumns.push('Action')
     this.dataSource= new MatTableDataSource(this.data);      
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   OnDetail(item:any){
