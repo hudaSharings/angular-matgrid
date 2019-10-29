@@ -2,4 +2,10 @@
 <p>
   Start editing to see some magic happen :)
 </p>
-<app-mat-grid></app-mat-grid>
+<app-mat-grid
+[columnDef]="Columns"
+[data]="rowData"
+(detail)="onDetail($event)"
+(edit)="onEdit($event)"
+(delete)="onDelete($event)"
+></app-mat-grid>

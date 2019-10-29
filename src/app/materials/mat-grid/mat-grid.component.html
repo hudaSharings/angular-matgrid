@@ -36,9 +36,9 @@ mat-grid works!
   <ng-container matColumnDef="Action">
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let element"> 
-      <span (click)="OnDetail()">Detail</span> |
-      <span (click)="OnEdit()">Edit</span> |
-      <span (click)="OnDelete()">Delete</span>
+      <span (click)="OnDetail(element)">Detail</span> |
+      <span (click)="OnEdit(element)">Edit</span> |
+      <span (click)="OnDelete(element)">Delete</span>
        </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
