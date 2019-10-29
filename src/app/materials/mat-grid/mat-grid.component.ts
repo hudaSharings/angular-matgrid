@@ -1,4 +1,7 @@
-import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter,ViewChild } from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 import {IColumn} from '../models'
 
 
@@ -11,7 +14,9 @@ export class MatGridComponent implements OnInit {
 
   Columns: IColumn[] =[]
   displayedColumns: string[]=[];
-  dataSource = []=[];
+  dataSource:any
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
 
   @Input()
   columnDef:IColumn[]
@@ -31,8 +36,9 @@ export class MatGridComponent implements OnInit {
   ngOnInit() {
     this.Columns=this.columnDef
     this.displayedColumns =this.columnDef.map(x=>{return x.name;}) 
-    this.dataSource= this.data; 
-     this.displayedColumns.push('Action')
+    this.displayedColumns.push('Action')
+    this.dataSource= new MatTableDataSource(this.data);      
+    this.dataSource.paginator = this.paginator;
   }
 
   OnDetail(item:any){
