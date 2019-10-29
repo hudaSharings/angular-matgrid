@@ -64,8 +64,11 @@ export class MatGridComponent implements OnInit {
   ngOnInit() {
     this.Columns=this.columnDef
     
-    this.displayedColumns =this.columnDef.map(x=>{return x.name;}) 
+    this.displayedColumns.push('Select')
+    this.columnDef.map(x=>{this.displayedColumns.push(x.name);}) 
     this.displayedColumns.push('Action')
+    
+    
     this.dataSource= new MatTableDataSource(this.data);      
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
