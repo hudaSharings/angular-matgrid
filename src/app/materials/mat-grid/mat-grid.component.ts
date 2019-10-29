@@ -9,9 +9,9 @@ import {IColumn} from '../models'
 })
 export class MatGridComponent implements OnInit {
 
-  Columns: IColumn[] 
-  displayedColumns: string[];
-  dataSource = [];
+  Columns: IColumn[] =[]
+  displayedColumns: string[]=[];
+  dataSource = []=[];
 
   @Input()
   columnDef:IColumn[]
