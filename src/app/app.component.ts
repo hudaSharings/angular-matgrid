@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IColumn,IMatGrid} from './materials/models'
+import {IColumn,MatGrid} from './materials/models'
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -23,7 +23,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent implements IMatGrid {
+export class AppComponent implements MatGrid {
   name = 'Angular';
    Columns= [
     {name:'position', field:'position'},

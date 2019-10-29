@@ -4,9 +4,9 @@ export interface IColumn{
 }
 
 export abstract class MatGrid{
-  Columns: IColumn[];
-  rowData:[];
-  onDetail(item:any);
-  OnEdit(item:any);
-  onDelete(item:any);
+ abstract Columns: IColumn[];
+ abstract rowData:[];
+ abstract onDetail(item:any);
+ abstract OnEdit(item:any);
+ abstract onDelete(item:any);
 }
