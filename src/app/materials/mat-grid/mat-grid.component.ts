@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {IColumn} from '../models'
 
-import{FormBuilder} from '@angular/forms'
+import{FormBuilder,FormGroup,FormControl} from '@angular/forms'
 @Component({
   selector: 'app-mat-grid',
   templateUrl: './mat-grid.component.html',
@@ -24,7 +24,7 @@ export class MatGridComponent implements OnInit {
   @Output()
   delete=new EventEmitter()
 
-
+  searchForm:FormGroup;
   Columns: IColumn[] =[]
   searchColumns: IColumn[] =[]
   displayedColumns: string[]=[];
@@ -67,14 +67,40 @@ export class MatGridComponent implements OnInit {
     this.displayedColumns.push('Select')
     this.columnDef.map(x=>{this.displayedColumns.push(x.name);}) 
     this.displayedColumns.push('Action')
-    this.dataSource= new MatTableDataSource(this.data);      
+    this.dataSource=  new MatTableDataSource(this.data);    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;   
     this.searchColumns=this.columnDef
+    this.searchForm=this.toFormGroup(this.columnDef);
   }
-  
+
+  loadAfterFilteredDataource(data:any[]){
+    this.dataSource=  new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; 
+  }
+  resetDataSource(){
+    this.dataSource=  new MatTableDataSource(this.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; 
+  }
+  payLoad:any;
 onSearchSubmitt(){
-  
+  let searchvalue =this.searchForm.value
+  let fiteredList=[];
+  alert(JSON.stringify(searchvalue['position']));
+  this.searchColumns.forEach(x=>{
+    let fiteredData=[];
+    if(searchvalue[x.name]){
+     fiteredData= this.data.filter(y=>{
+        return y[x.name]==searchvalue[x.name]}
+       );
+    }
+    fiteredData.map(x=>{fiteredList.push(x)})
+   }
+  )
+  debugger;
+  this.loadAfterFilteredDataource(fiteredList)
 }
 
   OnDetail(item:any){
@@ -85,6 +111,16 @@ this.edit.emit(item)
   }
   OnDelete(item:any){
 this.delete.emit(item)
+  }
+
+  toFormGroup(columns: IColumn[] ) {
+    let group: any = {};
+
+    columns.forEach(column => {
+      group[column.name] = new FormControl('');
+                                              
+    });
+    return new FormGroup(group);
   }
 
 }

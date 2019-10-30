@@ -1,7 +1,7 @@
 export interface IColumn{
   name:string;
   field:string; 
-  fieldType:string;
+  searchFieldType:string;
 }
 
 export abstract class MatGrid{

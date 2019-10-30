@@ -47,10 +47,10 @@ export class AppComponent extends MatGrid {
   
   name = 'Angular';
    Columns= [
-    {name:'position', field:'position',fieldType:'number'},
-    {name:'name', field:'name',fieldType:'string'},
-    {name:'weight', field:'weight',fieldType:'number'},
-    {name:'symbol', field:'symbol',fieldType:'string'} ,            
+    {name:'position', field:'position',searchFieldType:'number'},
+    {name:'name', field:'name',searchFieldType:'string'},
+    {name:'weight', field:'weight',searchFieldType:'number'},
+    {name:'symbol', field:'symbol',searchFieldType:'string'} ,            
     ]
     rowData=ELEMENT_DATA
     onDetail(item:any){

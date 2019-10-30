@@ -77,22 +77,25 @@ mat-grid works!
        <span  (click)="drawer.toggle()" class="btn-sm pointer float-right" >[X]</span>
       </p> 
    
-    <form name="searchform" (submit)="onSearchSubmitt()">
+    <form  [formGroup]="searchForm" (ngSubmit)="onSearchSubmitt()">
       <div *ngFor="let field of searchColumns;">
        {{field.name}}<br>
-       <div [ngSwitch]="field.fieldType">
-         <input *ngSwitchCase="'string'" type="text" [name]="field.name" class="search-input">
-         <input *ngSwitchCase="'number'" type="number"  [name]="field.name"  class="search-input">
-         <input *ngSwitchCase="'date'" type="date" [name]="field.name"  class="search-input">
+       <div [ngSwitch]="field.searchFieldType">
+         <input *ngSwitchCase="'string'" type="text" [formControlName]="field.name" class="search-input">
+         <input *ngSwitchCase="'number'" type="number"  [formControlName]="field.name"  class="search-input">
+         <input *ngSwitchCase="'date'" type="date" [formControlName]="field.name"  class="search-input">
+         <select *ngSwitchCase="'dropdown'" [formControlName]="field.name" class="search-input">
+         <option></option>
+         </select>
        </div>
            
       </div>
 
        <div > <br/>
-    <input type="submit"  class="btn-sm btn-primary" mat-raised-button/>
-    <input type="reset"  class="btn-sm btn-secondary" mat-raised-button/>
+    <button type="submit"  class="btn-sm btn-primary">Apply</button>
+    <input type="reset" (click)="resetDataSource()" class="btn-sm btn-secondary" />   
     
-    </div>
+    </div>    
     </form>
 
 
