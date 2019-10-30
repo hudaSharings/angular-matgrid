@@ -10,7 +10,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { MatGridComponent } from './mat-grid/mat-grid.component';
-
+import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 const matModules =[
     MatTableModule,
     MatPaginatorModule,
@@ -18,7 +18,9 @@ const matModules =[
     MatSortModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule
 ]
 const matComponents=[
 MatGridComponent

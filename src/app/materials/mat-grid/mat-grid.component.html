@@ -4,21 +4,9 @@ mat-grid works!
  
 <mat-drawer-container class="matgrid-container" autosize>
  
-  <mat-drawer #drawer class="matgrid-sidenav clearfix" mode="over" position="end">
-    <p>Search</p>   
-    <div> 
-    <button (click)="drawer.toggle()" class="btn-sm btn-info" mat-raised-button>
-      Applay
-    </button>
-    <button (click)="drawer.toggle()" class="btn-sm btn-danger" mat-raised-button>
-      Clear
-    </button>
-    </div>
-  </mat-drawer>
 
- <div class="matgrid-sidenav-content">    
-  <span (click)="drawer.toggle()" class="float-right " style="cursor:pointer;">
-    <span class="glyphicon glyphicon-search"></span>
+ <div class="matgrid-sidenav-content">  
+  <span (click)="drawer.toggle()" class="float-right pointer " >    
      Search</span>       
   <table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8" >
 
@@ -82,6 +70,38 @@ mat-grid works!
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
  </div>
+
+ 
+  <mat-drawer #drawer class="matgrid-sidenav clearfix" mode="over" position="end">
+    <p>Search
+       <span  (click)="drawer.toggle()" class="btn-sm pointer float-right" >[X]</span>
+      </p> 
+   
+    <form #searchForm (submit)="onSearchSubmitt()">
+      <label>name</label><br>
+      <input type="text" name="A" class="search-input"><br>
+      <label>number</label><br>
+      <input type="number"  name="B" class="search-input"><br>
+      <label>date</label><br>
+      <input type="date" name="C" class="search-input"><br>
+      <label>name</label><br>
+      <input type="text" name="A" class="search-input"><br>
+      <label>number</label><br>
+      <input type="number"  name="B" class="search-input"><br>
+      <label>date</label><br>
+      <input type="date" name="C" class="search-input"><br>
+     
+
+       <div > 
+    <input type="submit"  class="btn-sm btn-primary" mat-raised-button/>
+    <input type="reset"  class="btn-sm btn-secondary" mat-raised-button/>
+    
+    </div>
+    </form>
+
+
+   
+  </mat-drawer>
 
 
 </mat-drawer-container>

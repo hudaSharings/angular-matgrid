@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {IColumn} from '../models'
 
-
+import{FormBuilder} from '@angular/forms'
 @Component({
   selector: 'app-mat-grid',
   templateUrl: './mat-grid.component.html',
@@ -57,22 +57,24 @@ export class MatGridComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private fb:FormBuilder) {
    
    }
 
   ngOnInit() {
     this.Columns=this.columnDef
-    
     this.displayedColumns.push('Select')
     this.columnDef.map(x=>{this.displayedColumns.push(x.name);}) 
     this.displayedColumns.push('Action')
-    
-    
     this.dataSource= new MatTableDataSource(this.data);      
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;   
+    
   }
+  
+onSearchSubmitt(){
+  
+}
 
   OnDetail(item:any){
     this.detail.emit(item)
