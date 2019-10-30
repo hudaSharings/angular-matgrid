@@ -70,10 +70,22 @@ export class MatGridComponent implements OnInit {
     this.dataSource=  new MatTableDataSource(this.data);    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;   
-    this.searchColumns=this.columnDef
-    this.searchForm=this.toFormGroup(this.columnDef);
+    this.searchColumns=this.loadSerchColumns();
+    this.searchForm=this.toFormGroup(this.searchColumns);
   }
-
+  loadSerchColumns(){
+    let srchColumns:ISearchColumn[]=[]
+    this.columnDef.forEach(x=>{
+      var srColmn: ISearchColumn={
+        field:x.field,
+        name:x.name,
+        searchFieldType:x.searchFieldType,
+        condition:x.name+'Condition'
+      }
+      srchColumns.push(srColmn)
+    })
+    return srchColumns
+  }
   loadAfterFilteredDataource(data:any[]){
     this.dataSource=  new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
@@ -88,18 +100,34 @@ export class MatGridComponent implements OnInit {
 onSearchSubmitt(){
   let searchvalue =this.searchForm.value
   let fiteredList=[];
-  alert(JSON.stringify(searchvalue['position']));
+ // alert(JSON.stringify(searchvalue));
   this.searchColumns.forEach(x=>{
     let fiteredData=[];
     if(searchvalue[x.name]){
-     fiteredData= this.data.filter(y=>{
-        return y[x.name]==searchvalue[x.name]}
-       );
+      var condition=searchvalue[x.condition]
+      if(x.searchFieldType=='number'){
+          switch(condition){
+             case'eq' :fiteredData= this.data.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+             case'gt' :fiteredData= this.data.filter(y=>{return (y[x.name])>(searchvalue[x.name])});break
+             case'lt' :fiteredData= this.data.filter(y=>{return y[x.name]<searchvalue[x.name]});break
+            default:fiteredData= this.data.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+          }
+      }
+       if(x.searchFieldType=='string'){
+          switch(condition){
+             case'C' :fiteredData= this.data.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
+             case'S' :fiteredData= this.data.filter(y=>{return y[x.name].startsWith(searchvalue[x.name])});break
+             case'E' :fiteredData= this.data.filter(y=>{return y[x.name].endsWith(searchvalue[x.name])});break
+            default:fiteredData= this.data.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
+          }
+      }
+     
     }
     fiteredData.map(x=>{fiteredList.push(x)})
    }
   )
   debugger;
+  //if(fiteredList.length>0)
   this.loadAfterFilteredDataource(fiteredList)
 }
 
@@ -113,14 +141,24 @@ this.edit.emit(item)
 this.delete.emit(item)
   }
 
-  toFormGroup(columns: IColumn[] ) {
-    let group: any = {};
+  toFormGroup(columns: ISearchColumn[] ) {
+    let group: any = {}; 
+    
 
     columns.forEach(column => {
       group[column.name] = new FormControl('');
+      group[column.name+'Condition'] = new FormControl('');
                                               
     });
     return new FormGroup(group);
   }
 
+}
+
+export interface ISearchColumn{
+  name:string;
+  field:string; 
+  searchFieldType:string;
+  condition:string;
+ 
 }

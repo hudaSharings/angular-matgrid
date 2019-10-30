@@ -79,14 +79,36 @@ mat-grid works!
    
     <form  [formGroup]="searchForm" (ngSubmit)="onSearchSubmitt()">
       <div *ngFor="let field of searchColumns;">
-       {{field.name}}<br>
+       {{field.name}}        
        <div [ngSwitch]="field.searchFieldType">
-         <input *ngSwitchCase="'string'" type="text" [formControlName]="field.name" class="search-input">
-         <input *ngSwitchCase="'number'" type="number"  [formControlName]="field.name"  class="search-input">
-         <input *ngSwitchCase="'date'" type="date" [formControlName]="field.name"  class="search-input">
-         <select *ngSwitchCase="'dropdown'" [formControlName]="field.name" class="search-input">
-         <option></option>
-         </select>
+         <div *ngSwitchCase="'string'">  
+           <select [formControlName]='field.condition' class="search-input-type">
+             <option value="C">Containes</option>
+              <option value="S">StartsWith</option>
+               <option value="E">EndsWith</option>
+           </select>        
+            <input  type="text" [formControlName]="field.name" class="search-input">
+         </div>
+         <div *ngSwitchCase="'number'">
+            <select  [formControlName]='field.condition' class="search-input-type">
+             <option value="eq">==</option>
+              <option value="gt">></option>
+               <option value="lt"><</option>
+           </select>
+           <input  type="number"  [formControlName]="field.name"  class="search-input">
+         </div>
+         <div *ngSwitchCase="'date'">
+            <input  type="date" [formControlName]="field.name"  class="search-input">
+         </div>
+         <div *ngSwitchCase="'dropdown'">
+            <select  [formControlName]="field.name" class="search-input">
+            <option></option>
+            </select>
+         </div>
+        
+         
+        
+        
        </div>
            
       </div>
