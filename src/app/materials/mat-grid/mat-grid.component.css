@@ -4,3 +4,20 @@ table {
 .mat-column-select {
   overflow: visible;
 }
+
+.matgrid-container {
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.matgrid-sidenav-content {
+  
+  height: auto;  
+ 
+}
+
+.matgrid-sidenav {
+  padding: 10px;
+   background-color:cornsilk
+   }

@@ -1,7 +1,26 @@
 <p>
 mat-grid works!
 </p>
-<table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8" >
+ 
+<mat-drawer-container class="matgrid-container" autosize>
+ 
+  <mat-drawer #drawer class="matgrid-sidenav clearfix" mode="over" position="end">
+    <p>Search</p>   
+    <div> 
+    <button (click)="drawer.toggle()" class="btn-sm btn-info" mat-raised-button>
+      Applay
+    </button>
+    <button (click)="drawer.toggle()" class="btn-sm btn-danger" mat-raised-button>
+      Clear
+    </button>
+    </div>
+  </mat-drawer>
+
+ <div class="matgrid-sidenav-content">    
+  <span (click)="drawer.toggle()" class="float-right " style="cursor:pointer;">
+    <span class="glyphicon glyphicon-search"></span>
+     Search</span>       
+  <table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8" >
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -57,8 +76,13 @@ mat-grid works!
       <span (click)="OnEdit(element)">Edit</span> |
       <span (click)="OnDelete(element)">Delete</span>
        </td>
-  </ng-container>
+  </ng-container>  
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+ </div>
+
+
+</mat-drawer-container>
+

@@ -6,6 +6,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SelectionModel} from '@angular/cdk/collections';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { MatGridComponent } from './mat-grid/mat-grid.component';
 
@@ -14,7 +16,9 @@ const matModules =[
     MatPaginatorModule,
     MatIconModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule
 ]
 const matComponents=[
 MatGridComponent
