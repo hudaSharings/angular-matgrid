@@ -26,6 +26,7 @@ export class MatGridComponent implements OnInit {
 
 
   Columns: IColumn[] =[]
+  searchColumns: IColumn[] =[]
   displayedColumns: string[]=[];
   dataSource:any
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -69,7 +70,7 @@ export class MatGridComponent implements OnInit {
     this.dataSource= new MatTableDataSource(this.data);      
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;   
-    
+    this.searchColumns=this.columnDef
   }
   
 onSearchSubmitt(){

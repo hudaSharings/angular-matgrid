@@ -77,22 +77,18 @@ mat-grid works!
        <span  (click)="drawer.toggle()" class="btn-sm pointer float-right" >[X]</span>
       </p> 
    
-    <form #searchForm (submit)="onSearchSubmitt()">
-      <label>name</label><br>
-      <input type="text" name="A" class="search-input"><br>
-      <label>number</label><br>
-      <input type="number"  name="B" class="search-input"><br>
-      <label>date</label><br>
-      <input type="date" name="C" class="search-input"><br>
-      <label>name</label><br>
-      <input type="text" name="A" class="search-input"><br>
-      <label>number</label><br>
-      <input type="number"  name="B" class="search-input"><br>
-      <label>date</label><br>
-      <input type="date" name="C" class="search-input"><br>
-     
+    <form name="searchform" (submit)="onSearchSubmitt()">
+      <div *ngFor="let field of searchColumns;">
+       {{field.name}}<br>
+       <div [ngSwitch]="field.fieldType">
+         <input *ngSwitchCase="'string'" type="text" [name]="field.name" class="search-input">
+         <input *ngSwitchCase="'number'" type="number"  [name]="field.name"  class="search-input">
+         <input *ngSwitchCase="'date'" type="date" [name]="field.name"  class="search-input">
+       </div>
+           
+      </div>
 
-       <div > 
+       <div > <br/>
     <input type="submit"  class="btn-sm btn-primary" mat-raised-button/>
     <input type="reset"  class="btn-sm btn-secondary" mat-raised-button/>
     
