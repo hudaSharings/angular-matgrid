@@ -64,14 +64,31 @@ export class MatGridComponent implements OnInit {
 
   ngOnInit() {
     this.Columns=this.columnDef
-    this.displayedColumns.push('Select')
-    this.columnDef.map(x=>{this.displayedColumns.push(x.name);}) 
+    this.displayedColumns.push('Select')    
+    this.columnDef.map(x=>{x.display=true;this.displayedColumns.push(x.name);}) 
     this.displayedColumns.push('Action')
     this.dataSource=  new MatTableDataSource(this.data);    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;   
     this.searchColumns=this.loadSerchColumns();
     this.searchForm=this.toFormGroup(this.searchColumns);
+  }
+  loadDisplayColumns(loadAll:boolean){
+    debugger;
+      this.displayedColumns=[];
+      this.displayedColumns.push('Select')
+    if(loadAll){          
+      this.columnDef.map(x=>{x.display=true;this.displayedColumns.push(x.name);})      
+    }
+    else{
+    this.columnDef.map(x=>{
+          if(x.display)
+          this.displayedColumns.push(x.name);
+        }
+      ) 
+    }
+     this.displayedColumns.push('Action')
+    //  this.resetDataSource()
   }
   loadSerchColumns(){
     let srchColumns:ISearchColumn[]=[]
@@ -92,6 +109,7 @@ export class MatGridComponent implements OnInit {
     this.dataSource.sort = this.sort; 
   }
   resetDataSource(){
+    this.dataSource=  new MatTableDataSource([]);
     this.dataSource=  new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort; 

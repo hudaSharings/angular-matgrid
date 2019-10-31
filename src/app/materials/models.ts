@@ -2,7 +2,7 @@ export interface IColumn{
   name:string;
   field:string; 
   searchFieldType:string;
- 
+  display:boolean;
 }
 
 export abstract class MatGrid{
