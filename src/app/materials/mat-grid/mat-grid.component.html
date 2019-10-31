@@ -1,4 +1,3 @@
-
 <mat-card class="clearfix">
 	<mat-drawer-container class="matgrid-container" autosize>
 		<div class="matgrid-sidenav-content">
@@ -26,7 +25,8 @@
 				</ng-container>
 				<ng-container *ngFor="let col of Columns" matColumnDef="{{col.name}}">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{col.name|titlecase}} </th>
-					<td mat-cell *matCellDef="let element" (click)="selection.toggle(element)"> {{element[col.field]}} </td>
+					<td mat-cell *matCellDef="let element" (click)="selection.toggle(element)"> {{element[col.field]}}
+					</td>
 				</ng-container>
 
 				<ng-container matColumnDef="Action">
@@ -38,7 +38,7 @@
 					</td>
 				</ng-container>
 				<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;" >
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;">
 				</tr>
 			</table>
 			<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
@@ -118,11 +118,46 @@
 			</div>
 
 		</mat-drawer>
-    <mat-drawer #drawerNew class="matgrid-sidenav " mode="over" position="start">			
-        <div> Add New Data Form to be developed later 
-          	<span  (click)="drawerNew.toggle()" class="btn-sm pointer float-right" ><mat-icon>close</mat-icon></span>
-           </div>
-        
+
+		<mat-drawer #drawerNew class="matgrid-sidenav " mode="over" position="start">
+			<div class="clearfix"> <h3 class="float-left">Add New         </h3>
+				<span  (click)="drawerNew.toggle()" class="btn-sm pointer matgrid-icon-item float-right" > <mat-icon>close</mat-icon></span>        
+								<button type="reset" (click)="resetDataSource()" class="btn-xs btn-secondary float-right matgrid-icon-item" >
+                    Reset
+                </button>
+                	<button type="submit"  class="btn-xs btn-primary float-right matgrid-icon-item">
+                    Save
+                  </button>
+			</div>
+			<form [formGroup]="createForm" (ngSubmit)="onCreateSubmitt()">
+				<div class="row">
+					<div *ngFor="let field of Columns;">
+						<section class="formgroup col-lg-6">
+							<label class="label"> {{field.name |titlecase}} </label>
+							<div [ngSwitch]="field.searchFieldType">
+								<div *ngSwitchCase="'string'">
+									<input  type="text" [formControlName]="field.name" class="formcontrol">
+            </div>
+									<div *ngSwitchCase="'number'">
+										<input  type="number"  [formControlName]="field.name"  class="formcontrol">
+            </div>
+										<div *ngSwitchCase="'date'">
+											<input  type="date" [formControlName]="field.name"  class="formcontrol">
+            </div>
+											<div *ngSwitchCase="'selectSingle'">
+												<select  [formControlName]="field.name" class="formcontrol">
+                <option></option>
+              </select>
+											</div>
+										</div>
+						</section>
+					</div>
+				</div>
+        <div >
+          	
+        </div>
+			</form>
+
 		</mat-drawer>
 
 

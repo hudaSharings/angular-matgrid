@@ -43,3 +43,7 @@ table {
   border: 0;
   direction: rtl;
 }
+.footer {
+  position: fixed;  
+  width: 100%;  
+}

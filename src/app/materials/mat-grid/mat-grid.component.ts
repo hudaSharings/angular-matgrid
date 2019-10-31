@@ -28,6 +28,7 @@ export class MatGridComponent implements OnInit {
   
 
   searchForm:FormGroup;
+  createForm:FormGroup;
   Columns: IColumn[] =[]
   searchColumns: ISearchColumn[] =[]
   displayedColumns: string[]=[];
@@ -75,6 +76,7 @@ export class MatGridComponent implements OnInit {
     this.dataSource.sort = this.sort;   
     this.searchColumns=this.loadSerchColumns();
     this.searchForm=this.toFormGroup(this.searchColumns);
+    this.createForm=this.toFormGroup(this.Columns);
   }
   loadDisplayColumns(loadAll:boolean){
     debugger;
@@ -182,6 +184,8 @@ this.delete.emit(item)
     });
     return new FormGroup(group);
   }
+
+onCreateSubmitt(){}
 
 }
 
