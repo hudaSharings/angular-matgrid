@@ -1,151 +1,122 @@
 <p>
-mat-grid works!
+	mat-grid works!
 </p>
- 
+
 <mat-drawer-container class="matgrid-container" autosize>
- 
 
- <div class="matgrid-sidenav-content">  
-   
-   <span (click)="drawerCols.toggle()" class="float-right pointer btn btn-xs " >    
-     Columns</span> 
-  <span (click)="drawer.toggle()" class="float-right pointer btn btn-xs" >    
-     Search</span>       
-  <table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8" >
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+	<div class="matgrid-sidenav-content">
 
-  <!-- Position Column -->
-  <!-- <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-  </ng-container> -->
+		<span (click)="drawerCols.toggle()" class="float-right pointer btn btn-xs " >
+     Columns</span>
+		<span (click)="drawer.toggle()" class="float-right pointer btn btn-xs" >
+     Search</span>
+     <span  class="float-right pointer btn btn-xs" (click)="getSelected()">Get Selected</span>
+		<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+			<ng-container matColumnDef="Select">
+				<th mat-header-cell *matHeaderCellDef>
+					<mat-checkbox (change)="$event ? masterToggle() : null"
+						[checked]="selection.hasValue() && isAllSelected()"
+						[indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+					</mat-checkbox>
+				</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+						[checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+					</mat-checkbox>
+				</td>
+			</ng-container>
+			<ng-container *ngFor="let col of Columns" matColumnDef="{{col.name}}">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{col.name|titlecase}} </th>
+				<td mat-cell *matCellDef="let element"> {{element[col.field]}} </td>
+			</ng-container>
 
-  <!-- Name Column -->
-  <!-- <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container> -->
+			<ng-container matColumnDef="Action">
+				<th mat-header-cell *matHeaderCellDef> Action </th>
+				<td mat-cell *matCellDef="let element">
+					<span (click)="OnDetail(element)">Detail</span> |
+					<span (click)="OnEdit(element)">Edit</span> |
+					<span (click)="OnDelete(element)">Delete</span>
+				</td>
+			</ng-container>
+			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="selection.toggle(row)">        
+      </tr>
+		</table>
+		<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+	</div>
 
-  <!-- Weight Column -->
-  <!-- <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  </ng-container> -->
 
-  <!-- Symbol Column -->
-  <!-- <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-  </ng-container> -->
-   <ng-container matColumnDef="Select">
-    <th mat-header-cell *matHeaderCellDef>
-      <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    [aria-label]="checkboxLabel()">
-      </mat-checkbox>
-    </th>
-    <td mat-cell *matCellDef="let row">
-      <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)"
-                    [aria-label]="checkboxLabel(row)">
-      </mat-checkbox>
-    </td>
-  </ng-container>
-  <ng-container *ngFor="let col of Columns" matColumnDef="{{col.name}}">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col.name|titlecase}} </th>    
-    <td mat-cell *matCellDef="let element"> {{element[col.field]}} </td>
-  </ng-container>
+	<mat-drawer #drawer class="matgrid-sidenav " mode="over" position="end">
+		<p>Search
+			<span  (click)="drawer.toggle()" class="btn-sm pointer float-right" >[X]</span>
+		</p>
 
-  <ng-container matColumnDef="Action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let element"> 
-      <span (click)="OnDetail(element)">Detail</span> |
-      <span (click)="OnEdit(element)">Edit</span> |
-      <span (click)="OnDelete(element)">Delete</span>
-       </td>
-  </ng-container>  
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
- </div>
+		<form [formGroup]="searchForm" (ngSubmit)="onSearchSubmitt()">
+			<div *ngFor="let field of searchColumns;">
 
- 
-  <mat-drawer #drawer class="matgrid-sidenav " mode="over" position="end">
-    <p>Search
-       <span  (click)="drawer.toggle()" class="btn-sm pointer float-right" >[X]</span>
-      </p> 
-   
-    <form  [formGroup]="searchForm" (ngSubmit)="onSearchSubmitt()">
-      <div *ngFor="let field of searchColumns;">
-             
-       <div [ngSwitch]="field.searchFieldType" class="clearfix ">
-         <div *ngSwitchCase="'string'">  
-           <div class="clearfix"> 
-             <label class="float-left"> {{field.name |titlecase}} </label>
-           <select [formControlName]='field.condition' class="search-input-type float-left">
+				<div [ngSwitch]="field.searchFieldType" class="clearfix ">
+					<div *ngSwitchCase="'string'">
+						<div class="clearfix">
+							<label class="float-left"> {{field.name |titlecase}} </label>
+							<select [formControlName]='field.condition' class="search-input-type float-left">
              <option></option>
              <option value="C">Containes</option>
               <option value="S">StartsWith</option>
                <option value="E">EndsWith</option>
-           </select>   
-           </div>     
-            <input  type="text" [formControlName]="field.name" class="search-input float-left">
+           </select>
+						</div>
+						<input  type="text" [formControlName]="field.name" class="search-input float-left">
          </div>
-         <div *ngSwitchCase="'number'" class="clearfix ">
-           <div class="clearfix"> 
-             <label class="float-left"> {{field.name |titlecase}} </label>
-            <select  [formControlName]='field.condition' class="search-input-type float-left">
+						<div *ngSwitchCase="'number'" class="clearfix ">
+							<div class="clearfix">
+								<label class="float-left"> {{field.name |titlecase}} </label>
+								<select  [formControlName]='field.condition' class="search-input-type float-left">
               <option></option>
              <option value="eq">'=='</option>
               <option value="gt"> '<' </option>
                <option value="lt"> '>' </option>
            </select>
-           </div>
-           <input  type="number"  [formControlName]="field.name"  class="search-input float-left">
+							</div>
+							<input  type="number"  [formControlName]="field.name"  class="search-input float-left">
          </div>
-         <div *ngSwitchCase="'date'" class="clearfix">
-            <input  type="date" [formControlName]="field.name"  class="search-input float-left">
+							<div *ngSwitchCase="'date'" class="clearfix">
+								<input  type="date" [formControlName]="field.name"  class="search-input float-left">
          </div>
-         <div *ngSwitchCase="'selectSingle'" class="clearfix">
-            <select  [formControlName]="field.name" class="search-input">
+								<div *ngSwitchCase="'selectSingle'" class="clearfix">
+									<select  [formControlName]="field.name" class="search-input">
             <option></option>
             </select>
-         </div>
-        
-         
-        
-        
-       </div>
-           
-      </div>
+								</div>
 
-       <div > <br/>
-    <button type="submit"  class="btn-sm btn-primary">Apply</button>
-    <input type="reset" (click)="resetDataSource()" class="btn-sm btn-secondary" />   
-    
-    </div>    
-    </form>
 
-  </mat-drawer>
-   <mat-drawer #drawerCols class="matgrid-sidenav " mode="over" position="end">
-     <p>Columns
-       <span  (click)="drawerCols.toggle()" class="btn-sm pointer float-right" >[X]</span>
-      </p> 
-      <div *ngFor="let col of columnDef">
-         <span  class="btn-sm pointer float-left" (click)="col.display=!col.display;loadDisplayColumns(false)" >
+
+
+							</div>
+
+						</div>
+
+						<div> <br/>
+							<button type="submit"  class="btn-sm btn-primary">Apply</button>
+							<input type="reset" (click)="resetDataSource()" class="btn-sm btn-secondary" />
+
+    </div>
+		</form>
+
+	</mat-drawer>
+	<mat-drawer #drawerCols class="matgrid-sidenav " mode="over" position="end">
+		<p>Columns
+			<span  (click)="drawerCols.toggle()" class="btn-sm pointer float-right" >[X]</span>
+		</p>
+		<div *ngFor="let col of columnDef">
+			<span  class="btn-sm pointer float-left" (click)="col.display=!col.display;loadDisplayColumns(false)" >
             <span *ngIf="col.display">[-]</span><span *ngIf="!col.display">[+]</span>
-           {{col.name |titlecase}}
-           </span>
-           
-      </div>
+			{{col.name |titlecase}}
+			</span>
 
-  </mat-drawer>
+		</div>
+
+	</mat-drawer>
 
 
 </mat-drawer-container>
-

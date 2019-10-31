@@ -53,6 +53,10 @@ export class AppComponent extends MatGrid {
     {name:'symbol', field:'symbol',searchFieldType:'string'} ,            
     ]
     rowData=ELEMENT_DATA
+    getSelectedRow(selectedRows:any){
+      console.log(selectedRows);
+      alert( JSON.stringify(selectedRows))
+    }
     onDetail(item:any){
       console.log(item)
     }

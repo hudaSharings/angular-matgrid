@@ -23,6 +23,9 @@ export class MatGridComponent implements OnInit {
   edit=new EventEmitter()
   @Output()
   delete=new EventEmitter()
+  @Output()
+  getSelectedRows=new EventEmitter()
+  
 
   searchForm:FormGroup;
   Columns: IColumn[] =[]
@@ -155,7 +158,9 @@ onSearchSubmitt(){
   )
   
 }
-
+  getSelected(){
+  this.getSelectedRows.emit(this.selection.selected)
+  }
   OnDetail(item:any){
     this.detail.emit(item)
   }
