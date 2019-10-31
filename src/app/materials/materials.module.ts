@@ -8,6 +8,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 
 import { MatGridComponent } from './mat-grid/mat-grid.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
@@ -20,7 +22,9 @@ const matModules =[
     MatSidenavModule,
     MatToolbarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatSlideToggleModule
 ]
 const matComponents=[
 MatGridComponent
