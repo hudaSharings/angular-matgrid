@@ -72,35 +72,43 @@ mat-grid works!
  </div>
 
  
-  <mat-drawer #drawer class="matgrid-sidenav clearfix" mode="over" position="end">
+  <mat-drawer #drawer class="matgrid-sidenav " mode="over" position="end">
     <p>Search
        <span  (click)="drawer.toggle()" class="btn-sm pointer float-right" >[X]</span>
       </p> 
    
     <form  [formGroup]="searchForm" (ngSubmit)="onSearchSubmitt()">
       <div *ngFor="let field of searchColumns;">
-       {{field.name}}        
-       <div [ngSwitch]="field.searchFieldType">
+             
+       <div [ngSwitch]="field.searchFieldType" class="clearfix ">
          <div *ngSwitchCase="'string'">  
-           <select [formControlName]='field.condition' class="search-input-type">
+           <div class="clearfix"> 
+             <label class="float-left"> {{field.name |titlecase}} </label>
+           <select [formControlName]='field.condition' class="search-input-type float-left">
+             <option></option>
              <option value="C">Containes</option>
               <option value="S">StartsWith</option>
                <option value="E">EndsWith</option>
-           </select>        
-            <input  type="text" [formControlName]="field.name" class="search-input">
+           </select>   
+           </div>     
+            <input  type="text" [formControlName]="field.name" class="search-input float-left">
          </div>
-         <div *ngSwitchCase="'number'">
-            <select  [formControlName]='field.condition' class="search-input-type">
-             <option value="eq">==</option>
-              <option value="gt">></option>
-               <option value="lt"><</option>
+         <div *ngSwitchCase="'number'" class="clearfix ">
+           <div class="clearfix"> 
+             <label class="float-left"> {{field.name |titlecase}} </label>
+            <select  [formControlName]='field.condition' class="search-input-type float-left">
+              <option></option>
+             <option value="eq">'=='</option>
+              <option value="gt"> '<' </option>
+               <option value="lt"> '>' </option>
            </select>
-           <input  type="number"  [formControlName]="field.name"  class="search-input">
+           </div>
+           <input  type="number"  [formControlName]="field.name"  class="search-input float-left">
          </div>
-         <div *ngSwitchCase="'date'">
-            <input  type="date" [formControlName]="field.name"  class="search-input">
+         <div *ngSwitchCase="'date'" class="clearfix">
+            <input  type="date" [formControlName]="field.name"  class="search-input float-left">
          </div>
-         <div *ngSwitchCase="'dropdown'">
+         <div *ngSwitchCase="'selectSingle'" class="clearfix">
             <select  [formControlName]="field.name" class="search-input">
             <option></option>
             </select>
