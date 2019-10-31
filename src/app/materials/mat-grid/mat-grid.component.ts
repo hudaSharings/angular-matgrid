@@ -120,38 +120,38 @@ export class MatGridComponent implements OnInit {
   payLoad:any;
 onSearchSubmitt(){
   let searchvalue =this.searchForm.value
-  let fiteredList=[];  
+  let fiteredList=[]; 
+   debugger; 
  // alert(JSON.stringify(searchvalue));
   this.searchColumns.forEach(x=>{
-    let fiteredData=[];
+    let fiteredData=[]=this.data;
     debugger;
     if(searchvalue[x.name] && searchvalue[x.name]!=""){
       var condition=searchvalue[x.condition]
       switch(x.searchFieldType){
         case 'number':
           switch(condition){
-               case'eq' :fiteredData= this.data.filter(y=>{return y[x.name]==searchvalue[x.name]});break
-               case'gt' :fiteredData= this.data.filter(y=>{return (y[x.name])>(searchvalue[x.name])});break
-               case'lt' :fiteredData= this.data.filter(y=>{return (y[x.name])< (searchvalue[x.name])});break
-              default:fiteredData= this.data.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+               case'eq' :fiteredData= fiteredData.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+               case'gt' :fiteredData= fiteredData.filter(y=>{return (y[x.name])>(searchvalue[x.name])});break
+               case'lt' :fiteredData= fiteredData.filter(y=>{return (y[x.name])< (searchvalue[x.name])});break
+              default:fiteredData= fiteredData.filter(y=>{return y[x.name]==searchvalue[x.name]});break
             };
            break; 
         case 'string':
           switch(condition){
-              case'C' :fiteredData= this.data.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
-              case'S' :fiteredData= this.data.filter(y=>{return y[x.name].startsWith(searchvalue[x.name])}) ;break
-              case'E' :fiteredData= this.data.filter(y=>{return y[x.name].endsWith(searchvalue[x.name])});break
-              default:fiteredData= this.data.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
+              case'C' :fiteredData= fiteredData.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
+              case'S' :fiteredData= fiteredData.filter(y=>{return y[x.name].startsWith(searchvalue[x.name])}) ;break
+              case'E' :fiteredData= fiteredData.filter(y=>{return y[x.name].endsWith(searchvalue[x.name])});break
+              default:fiteredData= fiteredData.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
           }
           break;
 
         default:
-          fiteredData= this.data.filter(y=>{return y[x.name]==searchvalue[x.name]});break
-      }
-      fiteredData.map(x=>{fiteredList.push(x)})
+          fiteredData= fiteredData.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+      }  
         debugger;
         //if(fiteredList.length>0)
-        this.loadAfterFilteredDataource(fiteredList)
+        this.loadAfterFilteredDataource(fiteredData)
     }
     
    }
