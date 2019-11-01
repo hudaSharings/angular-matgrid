@@ -12,7 +12,8 @@ import {MatCardModule} from '@angular/material/card'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 
 import { MatGridComponent } from './mat-grid/mat-grid.component';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms'
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { MatDyformComponent } from './mat-dyform/mat-dyform.component'
 const matModules =[
     MatTableModule,
     MatPaginatorModule,
@@ -35,7 +36,7 @@ MatGridComponent
     CommonModule,
     matModules
   ],
-  declarations: [matComponents],
+  declarations: [matComponents, MatDyformComponent],
   exports:[
     matComponents,
     matModules  

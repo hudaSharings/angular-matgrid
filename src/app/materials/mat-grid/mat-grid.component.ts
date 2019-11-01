@@ -128,28 +128,28 @@ onSearchSubmitt(){
   this.searchColumns.forEach(x=>{
     let fiteredData=[]=this.data;
     debugger;
-    if(searchvalue[x.name] && searchvalue[x.name]!=""){
+    if(searchvalue[x.field] && searchvalue[x.field]!=""){
       var condition=searchvalue[x.condition]
       switch(x.searchFieldType){
         case 'number':
           switch(condition){
-               case'eq' :fiteredData= fiteredData.filter(y=>{return y[x.name]==searchvalue[x.name]});break
-               case'gt' :fiteredData= fiteredData.filter(y=>{return (y[x.name])>(searchvalue[x.name])});break
-               case'lt' :fiteredData= fiteredData.filter(y=>{return (y[x.name])< (searchvalue[x.name])});break
-              default:fiteredData= fiteredData.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+               case'eq' :fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
+               case'gt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])>(searchvalue[x.field])});break
+               case'lt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])< (searchvalue[x.field])});break
+              default:fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
             };
            break; 
         case 'string':
           switch(condition){
-              case'C' :fiteredData= fiteredData.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
-              case'S' :fiteredData= fiteredData.filter(y=>{return y[x.name].startsWith(searchvalue[x.name])}) ;break
-              case'E' :fiteredData= fiteredData.filter(y=>{return y[x.name].endsWith(searchvalue[x.name])});break
-              default:fiteredData= fiteredData.filter(y=>{return y[x.name].includes(searchvalue[x.name])});break
+              case'C' :fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
+              case'S' :fiteredData= fiteredData.filter(y=>{return y[x.field].startsWith(searchvalue[x.field])}) ;break
+              case'E' :fiteredData= fiteredData.filter(y=>{return y[x.field].endsWith(searchvalue[x.field])});break
+              default:fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
           }
           break;
 
         default:
-          fiteredData= fiteredData.filter(y=>{return y[x.name]==searchvalue[x.name]});break
+          fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
       }  
         debugger;
         //if(fiteredList.length>0)
@@ -178,8 +178,8 @@ this.delete.emit(item)
     
 
     columns.forEach(column => {
-      group[column.name] = new FormControl('');
-      group[column.name+'Condition'] = new FormControl('');
+      group[column.field] = new FormControl('');
+      group[column.field+'Condition'] = new FormControl('');
                                               
     });
     return new FormGroup(group);
