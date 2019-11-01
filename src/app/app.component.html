@@ -3,8 +3,12 @@
 <app-mat-grid
 [columnDef]="Columns"
 [data]="rowData"
+[formFields]="fields"
 (detail)="onDetail($event)"
 (edit)="onEdit($event)"
 (delete)="onDelete($event)"
 (getSelectedRows)="getSelectedRow($event)"
 ></app-mat-grid>
+
+<!-- 
+<app-mat-dyform [formFields]="fields"></app-mat-dyform> -->

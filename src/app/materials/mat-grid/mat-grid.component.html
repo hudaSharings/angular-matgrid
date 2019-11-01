@@ -120,44 +120,13 @@
 		</mat-drawer>
 
 		<mat-drawer #drawerNew class="matgrid-sidenav " mode="over" position="start">
-			<div class="clearfix"> <h3 class="float-left">Add New         </h3>
-				<span  (click)="drawerNew.toggle()" class="btn-sm pointer matgrid-icon-item float-right" > <mat-icon>close</mat-icon></span>        
-								<button type="reset" (click)="resetDataSource()" class="btn-xs btn-secondary float-right matgrid-icon-item" >
-                    Reset
-                </button>
-                	<button type="submit"  class="btn-xs btn-primary float-right matgrid-icon-item">
-                    Save
-                  </button>
+			<div class="clearfix">
+				<h3 class="float-left">Add New </h3>
+				<span  (click)="drawerNew.toggle()" class="btn-sm pointer matgrid-icon-item float-right" >      <mat-icon>close</mat-icon></span>
 			</div>
-			<form [formGroup]="createForm" (ngSubmit)="onCreateSubmitt()">
-				<div class="row">
-					<div *ngFor="let field of Columns;">
-						<section class="formgroup col-lg-6">
-							<label class="label"> {{field.name |titlecase}} </label>
-							<div [ngSwitch]="field.searchFieldType">
-								<div *ngSwitchCase="'string'">
-									<input  type="text" [formControlName]="field.field" class="formcontrol">
-            </div>
-									<div *ngSwitchCase="'number'">
-										<input  type="number"  [formControlName]="field.field"  class="formcontrol">
-            </div>
-										<div *ngSwitchCase="'date'">
-											<input  type="date" [formControlName]="field.field"  class="formcontrol">
-            </div>
-											<div *ngSwitchCase="'selectSingle'">
-												<select  [formControlName]="field.field" class="formcontrol">
-                <option></option>
-              </select>
-											</div>
-										</div>
-						</section>
-					</div>
-				</div>
-        <div >
-          	
-        </div>
-			</form>
-
+			<div class="container">
+				<app-mat-dyform [formFields]="formFields"></app-mat-dyform>
+			</div>
 		</mat-drawer>
 
 

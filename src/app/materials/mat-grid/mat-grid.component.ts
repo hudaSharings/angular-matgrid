@@ -3,7 +3,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
-import {IColumn} from '../models'
+import {IColumn,FormFieldBase} from '../models'
 
 import{FormBuilder,FormGroup,FormControl} from '@angular/forms'
 @Component({
@@ -16,6 +16,8 @@ export class MatGridComponent implements OnInit {
   @Input()
   columnDef:IColumn[]
   @Input()
+  formFields:FormFieldBase<any>[]
+  @Input()
   data:any[]
   @Output()
   detail=new EventEmitter()
@@ -25,6 +27,7 @@ export class MatGridComponent implements OnInit {
   delete=new EventEmitter()
   @Output()
   getSelectedRows=new EventEmitter()
+  
   
 
   searchForm:FormGroup;
@@ -175,8 +178,6 @@ this.delete.emit(item)
 
   toFormGroup(columns: ISearchColumn[] ) {
     let group: any = {}; 
-    
-
     columns.forEach(column => {
       group[column.field] = new FormControl('');
       group[column.field+'Condition'] = new FormControl('');

@@ -1,0 +1,18 @@
+
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="row">
+    <div *ngFor="let question of formFields" class="col-lg-6 col-md-6 col-sm-12" >
+      <app-mat-dyfield [question]="question" [form]="form"></app-mat-dyfield>
+    </div>
+    </div>
+    <div class="form-row float-right" style="margin-top:25px">
+      <button type="submit" [disabled]="!form.valid" style="margin:5px" class="btn-sm btn btn-info">Save</button>
+       <button type="reset" (click)="payLoad=null" style="margin:5px"  class="btn-sm btn btn-secondary">Reset</button>
+    </div>
+  </form>
+
+  <div *ngIf="payLoad" class="form-row ">
+    <strong>Saved the following values</strong><br>{{payLoad}}
+  </div>
+</div>

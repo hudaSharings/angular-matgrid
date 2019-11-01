@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import { IColumn, MatGrid } from "./materials/models";
+import { IColumn, MatGrid,
+IField,FormFieldBase,
+TextboxField, Dropdownield} from "./materials/models";
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -38,13 +40,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { position: 29, name: "Fluorine", weight: 18.9984, symbol: "F" },
   { position: 30, name: "Neon", weight: 20.1797, symbol: "Ne" }
 ];
+
 @Component({
   selector: "my-app",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent extends MatGrid {
+
+   
   name = "Angular";
+  fields=[];
   Columns = [
     { name: "position", field: "position", searchFieldType: "number" },
     { name: "name", field: "name", searchFieldType: "string" },
@@ -52,6 +58,12 @@ export class AppComponent extends MatGrid {
     { name: "symbol", field: "symbol", searchFieldType: "string" }
   ];
   rowData = ELEMENT_DATA;
+
+  constructor() {
+    super()
+    this.fields = this.getFormFields();
+  }
+
   getSelectedRow(selectedRows: any) {
     console.log(selectedRows);
     alert(JSON.stringify(selectedRows));
@@ -64,5 +76,41 @@ export class AppComponent extends MatGrid {
   }
   onEdit(item: any) {
     alert(JSON.stringify(item));
+  }
+
+
+   getFormFields() {
+
+    let questions: FormFieldBase<any>[] = [
+
+      new Dropdownield({
+        key: 'brave',
+        label: 'Bravery Rating',
+        options: [
+          {key: 'solid',  value: 'Solid'},
+          {key: 'great',  value: 'Great'},
+          {key: 'good',   value: 'Good'},
+          {key: 'unproven', value: 'Unproven'}
+        ],
+        order: 3
+      }),
+
+      new TextboxField({
+        key: 'firstName',
+        label: 'First name',
+        value: 'Bombasto',
+        required: true,
+        order: 1
+      }),
+
+      new TextboxField({
+        key: 'emailAddress',
+        label: 'Email',
+        type: 'email',        
+        order: 2
+      })
+    ];
+
+    return questions.sort((a, b) => a.order - b.order);
   }
 }

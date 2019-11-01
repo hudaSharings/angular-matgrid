@@ -1,21 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import{IField,ControlTypes,FormFieldBase} from '../models'
 @Component({
   selector: 'app-mat-dyform',
   templateUrl: './mat-dyform.component.html',
   styleUrls: ['./mat-dyform.component.css']
 })
 export class MatDyformComponent implements OnInit {
-
-Columns = [
-    { name: "position", field: "position", searchFieldType: "number" },
-    { name: "name", field: "name", searchFieldType: "string" },
-    { name: "DateOfBirth", field: "weight", searchFieldType: "number" },
-    { name: "symbol", field: "symbol", searchFieldType: "string" }
-  ];
+ @Input() formFields: FormFieldBase<any>[] = [];
+  form: FormGroup;
+  payLoad = '';
+// Columns:IField[] = [
+//     { key: "position", label: "position", controlType: ControlTypes.number, order:0, required:true ,value:null},
+//     { key: "name", label: "name", controlType: ControlTypes.text, order:1, required:true ,value:null},
+//     { key: "dob", label: "DateOfBirth", controlType: ControlTypes.date, order:2, required:true ,value:null},  
+//     { key: "symbol", label: "Symbol", controlType: ControlTypes.selectSingle, order:3, required:true ,value:null},
+//     { key: "active", label: "status", controlType: ControlTypes.check, order:4, required:true,value:null },   
+//   ];
   constructor() { }
 
   ngOnInit() {
+    this.form= this.toFormGroup(this.formFields)
+  }
+   isValid(key:string) {
+      return this.form.controls[key].valid;
+       }
+  toFormGroup(fields: FormFieldBase<any>[] ) {
+    let group: any = {}; 
+    fields.forEach(field => {
+      group[field.key] =field.required ? new FormControl(field.value || '', Validators.required)
+                                       : new FormControl(field.value || '');
+    });
+    return new FormGroup(group);
   }
 
+  onSubmit() {
+    this.payLoad = JSON.stringify(this.form.value);
+  }
 }
