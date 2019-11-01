@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import{IField,ControlTypes,FormFieldBase} from '../models'
 @Component({
@@ -9,7 +9,8 @@ import{IField,ControlTypes,FormFieldBase} from '../models'
 export class MatDyformComponent implements OnInit {
  @Input() formFields: FormFieldBase<any>[] = [];
   form: FormGroup;
-  payLoad = '';
+ @Output()
+  payLoad=new EventEmitter();
 // Columns:IField[] = [
 //     { key: "position", label: "position", controlType: ControlTypes.number, order:0, required:true ,value:null},
 //     { key: "name", label: "name", controlType: ControlTypes.text, order:1, required:true ,value:null},
@@ -35,6 +36,8 @@ export class MatDyformComponent implements OnInit {
   }
 
   onSubmit() {
-    this.payLoad = JSON.stringify(this.form.value);
+    debugger;
+    let values=this.form.value;
+    this.payLoad.emit(values);
   }
 }

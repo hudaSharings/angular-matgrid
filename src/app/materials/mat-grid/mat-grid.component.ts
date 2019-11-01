@@ -27,6 +27,8 @@ export class MatGridComponent implements OnInit {
   delete=new EventEmitter()
   @Output()
   getSelectedRows=new EventEmitter()
+  @Output()
+  getFormValues=new EventEmitter()
   
   
 
@@ -121,8 +123,7 @@ export class MatGridComponent implements OnInit {
     this.dataSource=  new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort; 
-  }
-  payLoad:any;
+  }  
 onSearchSubmitt(){
   let searchvalue =this.searchForm.value
   let fiteredList=[]; 
@@ -186,7 +187,10 @@ this.delete.emit(item)
     return new FormGroup(group);
   }
 
-onCreateSubmitt(){}
+onCreateSubmit(values:any){
+  debugger;
+  this.getFormValues.emit(values)
+}
 
 }
 

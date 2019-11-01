@@ -2,7 +2,7 @@
 <div>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="row">
-    <div *ngFor="let question of formFields" class="col-lg-6 col-md-6 col-sm-12" >
+    <div *ngFor="let question of formFields" class="col-lg-6 col-md-6 col-sm-6" >
       <app-mat-dyfield [question]="question" [form]="form"></app-mat-dyfield>
     </div>
     </div>
@@ -12,7 +12,5 @@
     </div>
   </form>
 
-  <div *ngIf="payLoad" class="form-row ">
-    <strong>Saved the following values</strong><br>{{payLoad}}
-  </div>
+  
 </div>

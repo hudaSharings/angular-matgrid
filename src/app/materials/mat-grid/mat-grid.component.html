@@ -125,7 +125,7 @@
 				<span  (click)="drawerNew.toggle()" class="btn-sm pointer matgrid-icon-item float-right" >      <mat-icon>close</mat-icon></span>
 			</div>
 			<div class="container">
-				<app-mat-dyform [formFields]="formFields"></app-mat-dyform>
+				<app-mat-dyform [formFields]="formFields" (payLoad)="onCreateSubmit($event)"></app-mat-dyform>
 			</div>
 		</mat-drawer>
 

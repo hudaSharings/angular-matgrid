@@ -77,6 +77,10 @@ export class AppComponent extends MatGrid {
   onEdit(item: any) {
     alert(JSON.stringify(item));
   }
+  getFormValues(values:any){
+    debugger;
+    alert(JSON.stringify(values))
+  }
 
 
    getFormFields() {
