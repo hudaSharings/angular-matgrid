@@ -70,7 +70,7 @@
 				<div *ngFor="let field of searchColumns;">
 
 					<div [ngSwitch]="field.searchFieldType" class="clearfix ">
-					  	  <div *ngSwitchCase="'string'">
+						<div *ngSwitchCase="'string'">
 							<div class="clearfix">
 								<label class="float-left"> {{field.name |titlecase}} </label>
 								<select [formControlName]='field.condition' class="search-input-type float-left">
@@ -82,24 +82,24 @@
 							</div>
 							<input  type="text" [formControlName]="field.field" class="search-input float-left">
                 </div>
-						  	<div *ngSwitchCase="'number'" class="clearfix ">
+							<div *ngSwitchCase="'number'" class="clearfix ">
 								<div class="clearfix">
 									<label class="float-left"> {{field.name |titlecase}} </label>
 									<select  [formControlName]='field.condition' class="search-input-type float-left">
-              <option></option>
-             <option value="eq">'=='</option>
-              <option value="gt"> '<' </option>
-               <option value="lt"> '>' </option>
-                <option value="gteq"> '=<' </option>
-               <option value="lteq"> '=>' </option>
+                      <option></option>
+                      <option value="eq">'=='</option>
+                      <option value="gt"> '<' </option>
+                      <option value="lt"> '>' </option>
+                      <option value="gteq"> '=<' </option>
+                      <option value="lteq"> '=>' </option>
                   </select>
 								</div>
 								<input  type="number"  [formControlName]="field.field"  class="search-input float-left">
                  </div>
-								<div *ngSwitchCase="'date'" >
-                  <div class="clearfix">
-									<label class="float-left"> {{field.name |titlecase}} </label>
-                  	<select #selectDateFilterType [formControlName]='field.condition' class="search-input-type float-left">
+								<div *ngSwitchCase="'date'">
+									<div class="clearfix">
+										<label class="float-left"> {{field.name |titlecase}} </label>
+										<select #selectDateFilterType [formControlName]='field.condition' class="search-input-type float-left">
                        <option></option>
                       <option value="eq">'=='</option>
                       <option value="gt"> '<' </option>
@@ -108,26 +108,27 @@
                       <option value="lteq"> '=>' </option>
                       <option value="bt"> Range </option>
                     </select>
-                  </div>	
-                   <input *ngIf="(selectDateFilterType.value=='bt'); else notRange" type="" [formControlName]="field.field"  class="search-input float-left">
-                  <ng-template #notRange>
-                    <input  type="date" [formControlName]="field.field"  class="search-input float-left">
-                  </ng-template>	
-                  							
-                </div>
-                <div *ngSwitchCase="'bool'" style="margin-top:5px" >
-                  <div  class="clearfix" >
-                    <label class="float-left"> {{field.name |titlecase}} </label>  
-                    <input type="checkbox" [formControlName]="field.field" style="margin-top:5px; margin-left:5px"  class=" formcontrol"/>                
+									</div>
+									<input *ngIf="(selectDateFilterType.value=='bt'); else notRange" type="" [formControlName]="field.field"  class="search-input float-left">
+									<ng-template #notRange>
+										<input  type="date" [formControlName]="field.field"  class="search-input float-left">
+                  </ng-template>
+
+								</div>
+								<div *ngSwitchCase="'bool'" style="margin-top:5px">
+									<div class="clearfix">
+										<label class="float-left"> {{field.name |titlecase}} </label>
+                    	<input type="checkbox" [formControlName]="field.condition" [value]="field.field" hidden style="margin-top:5px; margin-left:5px"  class=" formcontrol"/>
+										<input type="checkbox" [formControlName]="field.field" style="margin-top:5px; margin-left:5px"  class=" formcontrol"/>
                   </div>
-                
-                </div>
-								<div *ngSwitchCase="'selectSingle'" class="clearfix">
+
+									</div>
+									<div *ngSwitchCase="'selectSingle'" class="clearfix">
 										<select  [formControlName]="field.field" class="search-input">
                     <option></option>
                     </select>
+									</div>
 								</div>
-				   </div>
 
 							</div>
 

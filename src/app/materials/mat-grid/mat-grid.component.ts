@@ -140,6 +140,8 @@ onSearchSubmitt(){
                case'eq' :fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
                case'gt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])>(searchvalue[x.field])});break
                case'lt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])< (searchvalue[x.field])});break
+                case'gteq' :fiteredData= fiteredData.filter(y=>{return (y[x.field])>=(searchvalue[x.field])});break
+               case'lteq' :fiteredData= fiteredData.filter(y=>{return (y[x.field])<= (searchvalue[x.field])});break
               default:fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
             };
            break; 
@@ -153,20 +155,17 @@ onSearchSubmitt(){
           break;
         case 'date':
             switch(condition){
-                case'C' :fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
-                case'S' :fiteredData= fiteredData.filter(y=>{return y[x.field].startsWith(searchvalue[x.field])}) ;break
-                case'E' :fiteredData= fiteredData.filter(y=>{return y[x.field].endsWith(searchvalue[x.field])});break
-                default:fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
+               case'eq' :fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
+               case'gt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])>(searchvalue[x.field])});break
+               case'lt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])< (searchvalue[x.field])});break
+               case'gteq' :fiteredData= fiteredData.filter(y=>{return (y[x.field])>=(searchvalue[x.field])});break
+               case'lteq' :fiteredData= fiteredData.filter(y=>{return (y[x.field])<= (searchvalue[x.field])});break
+                case'bt' :fiteredData= fiteredData.filter(y=>{return (y[x.field])<= (searchvalue[x.field])});break
+              default:fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
             }
             break;    
        case 'bool':
-          switch(condition){
-              case'C' :fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
-              case'S' :fiteredData= fiteredData.filter(y=>{return y[x.field].startsWith(searchvalue[x.field])}) ;break
-              case'E' :fiteredData= fiteredData.filter(y=>{return y[x.field].endsWith(searchvalue[x.field])});break
-              default:fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
-          }
-          break;      
+        
 
         default:
           fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
@@ -174,6 +173,9 @@ onSearchSubmitt(){
         debugger;
         //if(fiteredList.length>0)
         this.loadAfterFilteredDataource(fiteredData)
+    }else if(searchvalue[x.field]===false){
+        fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]}); 
+         this.loadAfterFilteredDataource(fiteredData)       
     }
     
    }
