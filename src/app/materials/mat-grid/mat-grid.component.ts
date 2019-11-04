@@ -107,7 +107,7 @@ export class MatGridComponent implements OnInit {
         field:x.field,
         name:x.name,
         searchFieldType:x.searchFieldType,
-        condition:x.name+'Condition'
+        condition:x.field+'Condition'
       }
       srchColumns.push(srColmn)
     })
@@ -151,6 +151,22 @@ onSearchSubmitt(){
               default:fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
           }
           break;
+        case 'date':
+            switch(condition){
+                case'C' :fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
+                case'S' :fiteredData= fiteredData.filter(y=>{return y[x.field].startsWith(searchvalue[x.field])}) ;break
+                case'E' :fiteredData= fiteredData.filter(y=>{return y[x.field].endsWith(searchvalue[x.field])});break
+                default:fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
+            }
+            break;    
+       case 'bool':
+          switch(condition){
+              case'C' :fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
+              case'S' :fiteredData= fiteredData.filter(y=>{return y[x.field].startsWith(searchvalue[x.field])}) ;break
+              case'E' :fiteredData= fiteredData.filter(y=>{return y[x.field].endsWith(searchvalue[x.field])});break
+              default:fiteredData= fiteredData.filter(y=>{return y[x.field].includes(searchvalue[x.field])});break
+          }
+          break;      
 
         default:
           fiteredData= fiteredData.filter(y=>{return y[x.field]==searchvalue[x.field]});break
