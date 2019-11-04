@@ -67,9 +67,27 @@ export class TextboxField extends FormFieldBase<string> {
 export class Dropdownield extends FormFieldBase<string> {
   controlType = 'dropdown';
   options: {key: string, value: string}[] = [];
-
+  isApi:boolean;
+  url:string;
   constructor(options: {} = {}) {
     super(options);
+    this.isApi=options['isApi']||false;
+    if(!this.isApi)
     this.options = options['options'] || [];
+    else
+    {
+      this.url=options['url']
+      this.options = this.getOptionsFromApiURL();
+    }
+    
+  }
+
+   getOptionsFromApiURL(){
+     //this.url
+    return [{key: 'option', value: 'option'},
+    {key: 'option1', value: 'option2'},
+    {key: 'option2', value: 'option3'},
+    {key: 'option3', value: 'option4'},
+    {key: 'option4', value: 'option5'}]
   }
 }

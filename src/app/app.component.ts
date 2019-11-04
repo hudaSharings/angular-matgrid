@@ -94,12 +94,14 @@ export class AppComponent extends MatGrid {
       new Dropdownield({
         key: 'brave',
         label: 'Bravery Rating',
-        options: [
-          {key: 'solid',  value: 'Solid'},
-          {key: 'great',  value: 'Great'},
-          {key: 'good',   value: 'Good'},
-          {key: 'unproven', value: 'Unproven'}
-        ],
+        isApi:true,
+        url:"",
+        // options: [
+        //   {key: 'solid',  value: 'Solid'},
+        //   {key: 'great',  value: 'Great'},
+        //   {key: 'good',   value: 'Good'},
+        //   {key: 'unproven', value: 'Unproven'}
+        // ],        
         order: 3
       }),
 
