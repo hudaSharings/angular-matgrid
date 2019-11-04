@@ -99,7 +99,7 @@
 								<div *ngSwitchCase="'date'">
 									<div class="clearfix">
 										<label class="float-left"> {{field.name |titlecase}} </label>
-										<select #selectDateFilterType [formControlName]='field.condition' class="search-input-type float-left">
+										<select #selectDateFilterType [formControlName]='field.condition' (ngChange)="singleDate.value='';rangeDate.value=''"  class="search-input-type float-left">
                        <option></option>
                       <option value="eq">'=='</option>
                       <option value="gt"> '<' </option>
@@ -109,9 +109,25 @@
                       <option value="bt"> Range </option>
                     </select>
 									</div>
-									<input *ngIf="(selectDateFilterType.value=='bt'); else notRange" type="" [formControlName]="field.field"  class="search-input float-left">
-									<ng-template #notRange>
-										<input  type="date" [formControlName]="field.field"  class="search-input float-left">
+                  <div class="clearfix" *ngIf="(selectDateFilterType.value!='bt'); else range">
+	                    <!-- <input *ngIf="(selectDateFilterType.value=='bt'); else notRange" type="date" [formControlName]="field.field"  class="search-input float-left"> -->
+                       <input class=" search-input-date float-left"  [formControlName]="field.field" #singleDate
+            placeholder="Choose a date"
+            [satDatepicker]="picker"
+            [value]="">
+        <sat-datepicker #picker ></sat-datepicker>
+        <sat-datepicker-toggle class="float-left" matSuffix [for]="picker"></sat-datepicker-toggle>
+                  </div>
+								
+									<ng-template #range>
+										<!-- <input  type="date"   class="search-input float-left"> -->                    
+                        <input class=" search-input-date float-left" #rangeDate [formControlName]="field.field"
+            placeholder="Choose Date  Range "
+            [satDatepicker]="picker"
+            [value]="">
+        <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+        <sat-datepicker-toggle class="float-left" matSuffix [for]="picker"></sat-datepicker-toggle>
+        
                   </ng-template>
 
 								</div>
