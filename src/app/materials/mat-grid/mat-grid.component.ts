@@ -119,6 +119,7 @@ export class MatGridComponent implements OnInit {
     this.dataSource.sort = this.sort; 
   }
   resetDataSource(){
+    this.searchForm.reset();
     this.dataSource=  new MatTableDataSource([]);
     this.dataSource=  new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;

@@ -5,7 +5,10 @@
 				<span (click)="drawerNew.toggle()" class="float-left pointer matgrid-icon-item  " > <mat-icon>add_box_outline</mat-icon></span>
 				<span (click)="drawerCols.toggle()" class="float-right pointer  matgrid-icon-item  " ><mat-icon>menu</mat-icon></span>
 				<span (click)="drawer.toggle()" class="float-right pointer  matgrid-icon-item " ><mat-icon>search</mat-icon></span>
+         <span  class="float-right pointer  matgrid-icon-item " (click)="resetDataSource()">
+        <mat-icon>refresh</mat-icon></span>   
 				<span  class="float-right pointer  matgrid-icon-item " (click)="getSelected()"><mat-icon>ballot</mat-icon></span>
+       
 			</div>
 
 			<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
