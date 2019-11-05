@@ -28,7 +28,7 @@
 				</ng-container>
 				<ng-container *ngFor="let col of Columns" matColumnDef="{{col.name}}">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{col.name|titlecase}} </th>
-					<td mat-cell *matCellDef="let element" (click)="selection.toggle(element)">
+					<td mat-cell *matCellDef="let element" (click)="selection.toggle(element)" >
 						<span [ngSwitch]='col.searchFieldType'>
               <span *ngSwitchCase="'date'">                          
                     {{element[col.field] | date}}
