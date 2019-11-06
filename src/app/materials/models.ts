@@ -1,7 +1,7 @@
 export interface IColumn{
   name:string;
   field:string; 
-  searchFieldType:string;
+  searchFieldType:Fieldypes;
   display:boolean;
 }
 export interface IField{
@@ -25,7 +25,19 @@ export abstract class MatGrid{
 export enum ControlTypes{
   text,
   number,
-  date,  
+  date,
+  email,
+  url,  
+  check,
+  selectSingle,
+  SelectMultiple,
+}
+export enum FieldTypes{
+  text,
+  number,
+  date,
+  email,
+  url,  
   check,
   selectSingle,
   SelectMultiple,

@@ -27,8 +27,10 @@ export class MatDyformComponent implements OnInit {
       return this.form.controls[key].valid;
        }
   toFormGroup(fields: FormFieldBase<any>[] ) {
+    debugger;
     let group: any = {}; 
     fields.forEach(field => {
+      if(field)
       group[field.key] =field.required ? new FormControl(field.value || '', Validators.required)
                                        : new FormControl(field.value || '');
     });

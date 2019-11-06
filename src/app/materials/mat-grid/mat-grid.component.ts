@@ -3,7 +3,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
-import {IColumn,FormFieldBase} from '../models'
+import {IColumn,FormFieldBase,FieldTypes} from '../models'
 
 import{FormBuilder,FormGroup,FormControl} from '@angular/forms'
 @Component({
@@ -222,6 +222,9 @@ this.delete.emit(item)
 onCreateSubmit(values:any){
   debugger;
   this.getFormValues.emit(values)
+}
+get FielType(){
+  return FieldTypes
 }
 
 }

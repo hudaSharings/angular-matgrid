@@ -73,7 +73,7 @@
 				<div *ngFor="let field of searchColumns;">
 
 					<div [ngSwitch]="field.searchFieldType" class="clearfix ">
-						<div *ngSwitchCase="'string'">
+						<div *ngSwitchCase="FielType.text">
 							<div class="clearfix">
 								<label class="float-left"> {{field.name |titlecase}} </label>
 								<select [formControlName]='field.condition' class="search-input-type float-left">
@@ -85,7 +85,7 @@
 							</div>
 							<input  type="text" [formControlName]="field.field" class="search-input float-left">
                 </div>
-							<div *ngSwitchCase="'number'" class="clearfix ">
+							<div *ngSwitchCase="FielType.number" class="clearfix ">
 								<div class="clearfix">
 									<label class="float-left"> {{field.name |titlecase}} </label>
 									<select  [formControlName]='field.condition' class="search-input-type float-left">
@@ -99,7 +99,7 @@
 								</div>
 								<input  type="number"  [formControlName]="field.field"  class="search-input float-left">
                  </div>
-								<div *ngSwitchCase="'date'">
+								<div *ngSwitchCase="FielType.date">
 									<div class="clearfix">
 										<label class="float-left"> {{field.name |titlecase}} </label>
 										<select #selectDateFilterType [formControlName]='field.condition' (ngChange)="singleDate.value='';rangeDate.value=''"  class="search-input-type float-left">
@@ -134,7 +134,7 @@
                   </ng-template>
 
 								</div>
-								<div *ngSwitchCase="'bool'" style="margin-top:5px">
+								<div *ngSwitchCase="FielType.check" style="margin-top:5px">
 									<div class="clearfix">
 										<label class="float-left"> {{field.name |titlecase}} </label>
                     	<input type="checkbox" [formControlName]="field.condition" [value]="field.field" hidden style="margin-top:5px; margin-left:5px"  class=" formcontrol"/>
