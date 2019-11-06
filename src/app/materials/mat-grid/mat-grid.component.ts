@@ -72,7 +72,10 @@ export class MatGridComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.Columns=this.columnDef
+    this.Init();
+  }
+  Init(){    
+     this.Columns=this.columnDef
     this.displayedColumns.push('Select')    
     this.columnDef.map(x=>{x.display=true;this.displayedColumns.push(x.name);}) 
     this.displayedColumns.push('Action')
@@ -82,6 +85,12 @@ export class MatGridComponent implements OnInit {
     this.searchColumns=this.loadSerchColumns();
     this.searchForm=this.toFormGroup(this.searchColumns);
     this.createForm=this.toFormGroup(this.Columns);
+  }
+  dispose(){
+     this.Columns=[]
+    this.displayedColumns=[]      
+    this.dataSource= []        
+    this.searchColumns=[];   
   }
   loadDisplayColumns(loadAll:boolean){
     debugger;
@@ -116,14 +125,18 @@ export class MatGridComponent implements OnInit {
   loadAfterFilteredDataource(data:any[]){
     this.dataSource=  new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort; 
+    //this.dataSource.sort = this.sort; 
   }
   resetDataSource(){
     this.searchForm.reset();
-    this.dataSource=  new MatTableDataSource([]);
-    this.dataSource=  new MatTableDataSource(this.data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort; 
+    debugger
+    // this.dataSource=  new MatTableDataSource([]);
+    // this.dataSource=  new MatTableDataSource(this.data);
+    // this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort ; 
+    
+    this.dispose();
+    this.Init();
   }  
 onSearchSubmitt(){
   let searchvalue =this.searchForm.value
