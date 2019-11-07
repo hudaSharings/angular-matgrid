@@ -19,7 +19,8 @@ import {MatSelectModule} from '@angular/material/select'
 import { MatGridComponent } from './mat-grid/mat-grid.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { MatDyformComponent } from './mat-dyform/mat-dyform.component';
-import { MatDyfieldComponent } from './mat-dyform/mat-dyfield/mat-dyfield.component'
+import { MatDyfieldComponent } from './mat-dyform/mat-dyfield/mat-dyfield.component';
+import { DyformService } from './services/dyform.service'
 
 const matModules =[
     MatTableModule,
@@ -55,7 +56,7 @@ MatDyfieldComponent
   ],
   providers: [      
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-        {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+        {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS, providers: [DyformService]},
     ],
 
 })
