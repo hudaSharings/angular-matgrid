@@ -6,7 +6,9 @@ import {
   IField,
   FormFieldBase,
   TextboxField,
-  Dropdownield
+  Dropdownield,
+  CheckboxField,
+  InputField
 } from "./materials/models";
 export interface PeriodicElement {
   name: string;
@@ -341,10 +343,10 @@ export class AppComponent extends MatGrid {
     columns.forEach(column => {
       debugger;
       let _type = column.searchFieldType;
-      let filed: FormFieldBase<any>;
+      let field: FormFieldBase<any>;
       switch (_type) {
         case FieldTypes.text:
-          filed = new TextboxField({
+          field = new InputField({
             key: column.field,
             label: column.name,
             type: "text",
@@ -352,7 +354,7 @@ export class AppComponent extends MatGrid {
           });
           break;
         case FieldTypes.email:
-          filed = new TextboxField({
+          field = new InputField({
             key: column.field,
             label: column.name,
             type: "email",
@@ -360,16 +362,32 @@ export class AppComponent extends MatGrid {
           });
           break;
         case FieldTypes.number:
-          filed = new TextboxField({
+          field = new InputField({
             key: column.field,
             label: column.name,
             type: "number",
             order: 3
           });
           break;
+        case FieldTypes.date:
+          field = new InputField({
+            key: column.field,
+            label: column.name,
+            type: "date",
+            order: 3
+          });
+          break;
+        case FieldTypes.check:
+         field = new InputField({
+            key: column.field,
+            label: column.name,
+            type: "checkbox",
+            order: 3
+          });
+         break;    
       }
-      if(filed)
-      Fields.push(filed);
+      if(field)
+      Fields.push(field);
     });
     return Fields;
   }

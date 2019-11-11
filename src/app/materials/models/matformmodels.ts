@@ -23,6 +23,14 @@ export class FormFieldBase<T> {
     this.controlType = options.controlType || '';
   }
 }
+export class InputField extends FormFieldBase<string> {
+  controlType = 'input';
+  type: string;
+  constructor(options: {} = {}) {
+    super(options);
+    this.type = options['type'] || '';
+  }
+}
 export class TextboxField extends FormFieldBase<string> {
   controlType = 'textbox';
   type: string;
@@ -30,6 +38,24 @@ export class TextboxField extends FormFieldBase<string> {
   constructor(options: {} = {}) {
     super(options);
     this.type = options['type'] || '';
+  }
+}
+export class ChecktboxListField extends FormFieldBase<string> {
+  controlType = 'checkboxlist';
+  type: string;
+
+  constructor(options: {} = {}) {
+    super(options);
+    this.type = options['type'] || 'checkbox';
+  }
+}
+export class RadiobuttonListField extends FormFieldBase<string> {
+  controlType = 'Radiobuttonlist';
+  type: string;
+
+  constructor(options: {} = {}) {
+    super(options);
+    this.type = options['type'] || 'Radiobutton';
   }
 }
 export class Dropdownield extends FormFieldBase<string> {

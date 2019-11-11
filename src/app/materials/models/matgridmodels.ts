@@ -39,6 +39,7 @@ export enum FieldTypes{
   email,
   url,  
   check,
+  radio,
   selectSingle,
   SelectMultiple,
 }
