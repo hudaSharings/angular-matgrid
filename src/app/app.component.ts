@@ -2,12 +2,10 @@ import { Component } from "@angular/core";
 import {
   IColumn,
   MatGrid,
-  FieldTypes,
-  IField,
+  FieldTypes, 
   FormFieldBase,
   TextboxField,
-  Dropdownield,
-  CheckboxField,
+  Dropdownield,  
   InputField
 } from "./materials/models";
 export interface PeriodicElement {

@@ -56,7 +56,8 @@ MatDyfieldComponent
   ],
   providers: [      
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-        {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS, providers: [DyformService]},
+        {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+        {provide:DyformService}
     ],
 
 })

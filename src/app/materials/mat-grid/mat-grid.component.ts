@@ -5,11 +5,13 @@ import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {IColumn,FormFieldBase,FieldTypes} from '../models'
 
+import { DyformService } from '../services/dyform.service'
 import{FormBuilder,FormGroup,FormControl} from '@angular/forms'
 @Component({
   selector: 'app-mat-grid',
   templateUrl: './mat-grid.component.html',
-  styleUrls: ['./mat-grid.component.css']
+  styleUrls: ['./mat-grid.component.css'],
+  providers:[DyformService]
 })
 export class MatGridComponent implements OnInit {
 
@@ -31,7 +33,7 @@ export class MatGridComponent implements OnInit {
   getFormValues=new EventEmitter()
   
   
-
+  createFormFields:FormFieldBase<any>[]
   searchForm:FormGroup;
   createForm:FormGroup;
   Columns: IColumn[] =[]
@@ -67,7 +69,7 @@ export class MatGridComponent implements OnInit {
 
 
 
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder,private dyformService:DyformService) {
    
    }
 
@@ -85,6 +87,10 @@ export class MatGridComponent implements OnInit {
     this.searchColumns=this.loadSerchColumns();
     this.searchForm=this.toFormGroup(this.searchColumns);
     this.createForm=this.toFormGroup(this.Columns);
+    
+    this.createFormFields=(this.formFields && this.formFields.length>0)?this.formFields : this.dyformService.getFields(this.columnDef)
+    
+
   }
   dispose(){
      this.Columns=[]
