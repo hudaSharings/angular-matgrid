@@ -280,6 +280,7 @@ export class AppComponent extends MatGrid {
 
   constructor() {
     super();
+    
     this.fields = this.getFields(this.Columns); //this.getFormFields();
   }
 
@@ -295,6 +296,8 @@ export class AppComponent extends MatGrid {
   }
   onEdit(item: any) {
     alert(JSON.stringify(item));
+    debugger;
+    //this.SetFiledValues(this.Columns,this.fields,item);
   }
   getFormValues(values: any) {
     debugger;
@@ -337,6 +340,7 @@ export class AppComponent extends MatGrid {
   }
 
   getFields(columns:IColumn[]) {
+    debugger;
     let Fields: FormFieldBase<any>[] = [];
     columns.forEach(column => {
       debugger;
@@ -348,7 +352,9 @@ export class AppComponent extends MatGrid {
             key: column.field,
             label: column.name,
             type: "text",
-            order: 1
+            value:null,
+            order: 1,
+            
           });
           break;
         case FieldTypes.email:
@@ -356,6 +362,7 @@ export class AppComponent extends MatGrid {
             key: column.field,
             label: column.name,
             type: "email",
+            value:null,
             order: 2
           });
           break;
@@ -364,6 +371,7 @@ export class AppComponent extends MatGrid {
             key: column.field,
             label: column.name,
             type: "number",
+            value:null,
             order: 3
           });
           break;
@@ -372,6 +380,7 @@ export class AppComponent extends MatGrid {
             key: column.field,
             label: column.name,
             type: "date",
+            value:null,
             order: 3
           });
           break;
@@ -380,6 +389,7 @@ export class AppComponent extends MatGrid {
             key: column.field,
             label: column.name,
             type: "checkbox",
+            value:null,
             order: 3
           });
          break;    
@@ -389,4 +399,6 @@ export class AppComponent extends MatGrid {
     });
     return Fields;
   }
+
+ 
 }
