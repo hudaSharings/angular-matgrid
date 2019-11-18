@@ -295,6 +295,8 @@ export class AppComponent extends MatGrid {
     alert(JSON.stringify(item));
   }
   onEdit(item: any) {
+    debugger;
+    this.fields = this.SetFiledValues(item)
     alert(JSON.stringify(item));
     debugger;
     //this.SetFiledValues(this.Columns,this.fields,item);
@@ -399,6 +401,21 @@ export class AppComponent extends MatGrid {
     });
     return Fields;
   }
+  SetFiledValues(data:any){
+    let columns = this.Columns;
+    let _fileds=this.fields;
+    let _data=data;
+      columns.forEach(x=>{
+        debugger;
+        _fileds.map(f=>{
+          if(f.key==x.field){
+            f.value=data[x.field]
+            //console.log(f);
+          }
+        })
+      })
 
+    return _fileds;  
+  }
  
 }

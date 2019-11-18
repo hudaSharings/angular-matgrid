@@ -57,6 +57,7 @@ export class DyformService {
       });
       return Fields;
     }
+    
     SetFiledValues(columns:IColumn[],fields: FormFieldBase<any>[],data:any){
     let _fileds=fields;
     let _data=data;
