@@ -1,6 +1,5 @@
 # angular-matgrid  
 #### see the demo <a href="https://angular-matgrid.stackblitz.io/">here</a>
-
 #### Material Table with Dynamic Search, Sorting, Paging and Dynamic Form to Creat New Record
 #### Configuring the columns and Rowdata  
  Columns = [  </br>
@@ -19,4 +18,4 @@
 #### development in Progress 
       1.Grouping 
       2.Global Setting option to configure the grid
-      3.Options to Server Side Configurable 
+      3.Options for Server Side Configurable 
