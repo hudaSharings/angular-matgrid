@@ -1,7 +1,7 @@
 # angular-matgrid  
 #### see the demo <a href="https://angular-matgrid.stackblitz.io/">here</a>
 
-### Material Table as ReuseableComponent with Dynamic Search, Sorting, Paging and Dynamic Form to Creat New Record
+#### Material Table with Dynamic Search, Sorting, Paging and Dynamic Form to Creat New Record
 #### Configuring the columns and Rowdata  
  Columns = [  </br>
     { name: "position", field: "position", searchFieldType: FieldTypes.number },</br>
