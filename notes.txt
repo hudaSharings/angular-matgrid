@@ -1,1 +1,36 @@
 select and multi select sample https://stackblitz.com/edit/mat-select-search
+
+const reGroup = (list, key) => {
+    const newGroup = {};
+    list.forEach(item => {
+        const newItem = Object.assign({}, item);
+        delete newItem[key];
+        newGroup[item[key]] = newGroup[item[key]] || [];
+        newGroup[item[key]].push(newItem);
+    });
+    return newGroup;
+};
+
+const animals = [
+  {
+    type: 'dog',
+    breed: 'puddle'
+  },
+  {
+    type: 'dog',
+    breed: 'labradoodle'
+  },
+  {
+    type: 'cat',
+    breed: 'siamese'
+  },
+  {
+    type: 'dog',
+    breed: 'french bulldog'
+  },
+  {
+    type: 'cat',
+    breed: 'mud'
+  }
+];
+console.log(reGroup(animals, 'type'));

@@ -11,13 +11,6 @@ export class MatDyformComponent implements OnInit {
   form: FormGroup;
  @Output()
   payLoad=new EventEmitter();
-// Columns:IField[] = [
-//     { key: "position", label: "position", controlType: ControlTypes.number, order:0, required:true ,value:null},
-//     { key: "name", label: "name", controlType: ControlTypes.text, order:1, required:true ,value:null},
-//     { key: "dob", label: "DateOfBirth", controlType: ControlTypes.date, order:2, required:true ,value:null},  
-//     { key: "symbol", label: "Symbol", controlType: ControlTypes.selectSingle, order:3, required:true ,value:null},
-//     { key: "active", label: "status", controlType: ControlTypes.check, order:4, required:true,value:null },   
-//   ];
   constructor() { }
 
   ngOnInit() {
